@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSE 108 Backend Validation Sandbox</title>
+</head>
+<body>
+    <h1>📋 CSE 108 Data Tier Test Bench</h1>
+    <p>Pure HTML test driver to execute transactions and verify the data layers independently.</p>
+    <hr>
+
+    <h3>0. Mock Login Test (POST JSON)</h3>
+  
+    <!-- Input fields where the user types their credentials -->
+    <input type="text" id="login_user" placeholder="Username" required>
+    <input type="text" id="login_pass" placeholder="Password" required>
+    
+    <!-- Button that triggers the fetch request when clicked -->
+    <button type="button" onclick="
+        // Send a POST request to the Flask /login route
+        fetch('/login', { 
+        method: 'POST', 
+        // Tell Flask that the incoming data is formatted as JSON text
+        headers: {'Content-Type': 'application/json'}, 
+        // First JSON.stringify: Convert the JS object into a plain JSON text string so it can travel over the network
+        body: JSON.stringify({ 
+            username: document.getElementById('login_user').value, 
+            password: document.getElementById('login_pass').value 
+        }) 
+        })
+        // Parse the raw JSON text response from Flask back into a usable JS object
+        .then(r => r.json())
+        // Second JSON.stringify: Flatten the entire JS object back into a readable string so alert() can print it all at once
+        .then(data => alert(JSON.stringify(data)));
+    ">Test POST /login</button>
+    <hr>
+
+    <h3>1. View Master Student Directory (GET)</h3>
+    <form action="/students" method="GET">
+        <button type="submit">Run GET /students</button>
+    </form>
+    <hr>
+
+    <h3>2. View Master Course Directory Catalog (GET)</h3>
+    <form action="/courses" method="GET">
+        <button type="submit">Run GET /courses</button>
+    </form>
+    <hr>
+
+    <h3>2. View Master Enrollment Table (GET)</h3>
+    <form action="/enrollments" method="GET">
+        <button type="submit">Run GET /enrollments</button>
+    </form>
+    <hr>
+
+    <h3>3. Lookup Student Schedule Of Enrolled Courses Search Based On ID (GET Path Variable)</h3>
+    <p>Enter any valid ID number (1 for Jose, 2 for Betty) to call the route parameter path natively.</p>
+    <form onsubmit="this.action='/student/my-courses/' + document.getElementById('search_id').value;" method="GET">
+        <label>Input Target Student ID Number:</label>
+        <input type="number" id="search_id" placeholder="Enter value" required>
+        <button type="submit">Verify Schedule Output Stream</button>
+    </form>
+    <hr>
+
+    <h3>4. Enroll Existing Student Into Course (POST Parameter Track)</h3>
+    <p>Enter any Class ID and Student ID to test the enrollment guards.</p>
+    <form onsubmit="this.action='/enroll/' + document.getElementById('enroll_class').value + '/' + document.getElementById('enroll_student').value;" method="POST">
+        <label>Class ID:</label>
+        <input type="number" id="enroll_class" placeholder="Enter value" required>
+        <label>Student ID:</label>
+        <input type="number" id="enroll_student" placeholder="Enter value" required>
+        <button type="submit">Submit POST /enroll</button>
+    </form>
+    <hr>
+
+    <h3>5. Course Drop Actions (POST Parameter Track)</h3>
+    <p>Enter any Class ID and Student ID to test dropping a class.</p>
+    <form onsubmit="this.action='/drop/' + document.getElementById('drop_class').value + '/' + document.getElementById('drop_student').value;" method="POST">
+        <label>Class ID:</label>
+        <input type="number" id="drop_class" placeholder="Enter value" required>
+        <label>Student ID:</label>
+        <input type="number" id="drop_student" placeholder="Enter value" required>
+        <button type="submit">Submit POST /drop</button>
+    </form>
+
+    <hr>
+
+    <h3>6. Teacher Update Grade (POST JSON + Path Variables)</h3>
+    <input type="number" id="grade_class_id" placeholder="Class ID">
+    <input type="number" id="grade_student_id" placeholder="Student ID">
+    <input type="number" step="0.1" id="grade_val" placeholder="New Grade (e.g. 95.5)">
+    <button type="button" onclick="
+        fetch('/teacher/update-grade/' + document.getElementById('grade_class_id').value + '/' + document.getElementById('grade_student_id').value, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ grade: parseFloat(document.getElementById('grade_val').value) })
+        })
+        .then(r => r.json())
+        .then(data => alert(JSON.stringify(data)));
+    ">Test POST /teacher/update-grade</button>
+    <hr>
+
+    <h3>7. Admin Create Class (POST JSON)</h3>
+    <input type="text" id="new_class_name" placeholder="Class Name (e.g. CS 106)">
+    <input type="text" id="new_teacher" placeholder="Teacher Name">
+    <input type="text" id="new_time" placeholder="Time (e.g. MWF 2:00-2:50 PM)">
+    <input type="number" id="new_cap" placeholder="Capacity">
+    <button type="button" onclick="
+        fetch('/admin/create-class', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                class_name: document.getElementById('new_class_name').value,
+                teacher_name: document.getElementById('new_teacher').value,
+                class_time: document.getElementById('new_time').value,
+                capacity: parseInt(document.getElementById('new_cap').value)
+            })
+        })
+        .then(r => r.json())
+        .then(data => alert(JSON.stringify(data)));
+    ">Test POST /admin/create-class</button>
+    <hr>
+
+    <h3>8. Admin Update Class (POST JSON + Path Variable)</h3>
+    <input type="number" id="upd_class_id" placeholder="Target Class ID">
+    <input type="text" id="upd_class_name" placeholder="Updated Class Name">
+    <input type="text" id="upd_teacher" placeholder="Updated Teacher">
+    <input type="text" id="upd_time" placeholder="Updated Time">
+    <input type="number" id="upd_cap" placeholder="Updated Capacity">
+    <button type="button" onclick="
+        fetch('/admin/update-class/' + document.getElementById('upd_class_id').value, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                class_name: document.getElementById('upd_class_name').value,
+                teacher_name: document.getElementById('upd_teacher').value,
+                class_time: document.getElementById('upd_time').value,
+                capacity: parseInt(document.getElementById('upd_cap').value)
+            })
+        })
+        .then(r => r.json())
+        .then(data => alert(JSON.stringify(data)));
+    ">Test POST /admin/update-class</button>
+    <hr>
+
+    <h3>9. Admin Update Student (POST JSON + Path Variable)</h3>
+    <input type="number" id="upd_stu_id" placeholder="Target Student ID">
+    <input type="text" id="upd_stu_name" placeholder="Updated Student Name">
+    <button type="button" onclick="
+        fetch('/admin/update-student/' + document.getElementById('upd_stu_id').value, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                student_name: document.getElementById('upd_stu_name').value
+            })
+        })
+        .then(r => r.json())
+        .then(data => alert(JSON.stringify(data)));
+    ">Test POST /admin/update-student</button>
+    <hr>
+
+    <h3>10. Admin Delete Class (DELETE Path Variable)</h3>
+    <input type="number" id="del_class_id" placeholder="Target Class ID">
+    <button type="button" onclick="
+        fetch('/admin/delete-class/' + document.getElementById('del_class_id').value, {
+            method: 'DELETE'
+        })
+        .then(r => r.json())
+        .then(data => alert(JSON.stringify(data)));
+    ">Test DELETE /admin/delete-class</button>
+    <hr>
+
+    <h3>11. Admin Delete Student (DELETE Path Variable)</h3>
+    <input type="number" id="del_stu_id" placeholder="Target Student ID">
+    <button type="button" onclick="
+        fetch('/admin/delete-student/' + document.getElementById('del_stu_id').value, {
+            method: 'DELETE'
+        })
+        .then(r => r.json())
+        .then(data => alert(JSON.stringify(data)));
+    ">Test DELETE /admin/delete-student</button>
+
+</body>
+</html>
