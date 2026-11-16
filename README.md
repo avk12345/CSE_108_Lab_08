@@ -318,6 +318,8 @@ Permanently removes a student account and clears all associated enrollment links
 
 # ACME University – React Frontend
 
+How to run: python app.py on terminal 1, then cd frontend, npm install, npm run dev on terminal 2 due to Vite and React.
+
 | File | What it does |
 
 | `package.json` | Lists the dependencies (React, Vite) and the `npm run dev` / `npm run build` commands. |
