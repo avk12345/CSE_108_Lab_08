@@ -26,19 +26,21 @@ export default function GradeTable({ course, onBack }) {
                         {error}
                     </p>
                 )}
-                <table className="grade-table">
-                    <thead>
-                        <tr>
-                            <th>Student Name</th>
-                            <th>Grade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows.map((r) => (
-                            <GradeRow key={r.enrollment_id} row={r} onError={setError} />
-                        ))}
-                    </tbody>
-                </table>
+                <div className="table-scroll" role="region" aria-label="Student grades" tabIndex={0}>
+                    <table className="grade-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows.map((r) => (
+                                <GradeRow key={r.enrollment_id} row={r} onError={setError} />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
     );

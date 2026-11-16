@@ -12,8 +12,8 @@ export default function App() {
     return (
         <div className="app">
             <header className="navbar">
-                <span className="welcome">Welcome {user.display_name}!</span>
                 <h1 className="site-title">ACME University</h1>
+                <span className="welcome">Welcome {user.display_name}!</span>
                 <button type="button" className="signout-link" onClick={() => setUser(null)}>
                     Sign out
                 </button>

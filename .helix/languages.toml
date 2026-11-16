@@ -1,0 +1,19 @@
+[language-server.oxlint]
+command = "oxlint"
+args = ["--lsp"]
+
+[language-server.oxfmt]
+command = "oxfmt"
+args = ["--lsp"]
+
+[[language]]
+name = "python"
+language-servers = ["pyright"]
+
+[[language]]
+name = "javascript"
+language-servers = [{ name = "oxfmt", only-features = ["format"] }, "oxlint", "typescript-language-server"]
+
+[[language]]
+name = "jsx"
+language-servers = [{ name = "oxfmt", only-features = ["format"] }, "oxlint", "typescript-language-server"]

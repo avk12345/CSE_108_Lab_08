@@ -1,0 +1,20 @@
+inherits = "base16_default"
+# Indexed roles are supplied by Pond's terminal light/dark palettes.
+# Default background preserves terminal transparency, unlike an indexed fill.
+"ui.gutter" = { bg = "default", modifiers = [] }
+"ui.linenr" = { fg = "45", bg = "default", modifiers = [] }
+"ui.linenr.selected" = { fg = "46", bg = "default", modifiers = ["bold"] }
+"ui.cursor" = { fg = "47", bg = "48", modifiers = [] }
+"ui.cursor.primary" = { fg = "47", bg = "48", modifiers = [] }
+"ui.selection" = { fg = "51", bg = "49", modifiers = [] }
+"ui.selection.primary" = { fg = "51", bg = "49", modifiers = [] }
+# Picker previews retain syntax foregrounds; use a separate contrasting surface.
+"ui.highlight" = { bg = "68", modifiers = ["bold"] }
+"ui.statusline.normal" = { fg = "55", bg = "52", modifiers = [] }
+"ui.statusline.insert" = { fg = "55", bg = "53", modifiers = [] }
+"ui.statusline.select" = { fg = "55", bg = "54", modifiers = [] }
+"ui.popup" = { fg = "58", bg = "59", modifiers = [] }
+"ui.help" = { fg = "48", bg = "44", modifiers = [] }
+"ui.menu" = { fg = "62", bg = "63", modifiers = [] }
+"ui.menu.selected" = { fg = "51", bg = "50", modifiers = [] }
+"ui.statusline" = { fg = "66", bg = "67", modifiers = [] }

@@ -1,0 +1,29 @@
+# Container-wide defaults; the project does not need .helix/config.toml.
+theme = "pond-project"
+
+[editor]
+line-number = "relative"
+color-modes = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+# Toggle a Glow-rendered reading buffer in the focused split; no source saves.
+[keys.normal]
+C-z = ["normal_mode", "save_selection", "select_all", ":pipe-to python3 ~/.config/helix/pond-glow-preview.py capture", "jump_backward", ":open %sh{python3 ~/.config/helix/pond-glow-preview.py toggle <<'POND//GLOW'\n%{buffer_name}\n%{cursor_line}\n%{cursor_column}\nPOND//GLOW\n}", "align_view_middle"]
+
+[keys.insert]
+C-z = ["normal_mode", "save_selection", "select_all", ":pipe-to python3 ~/.config/helix/pond-glow-preview.py capture", "jump_backward", ":open %sh{python3 ~/.config/helix/pond-glow-preview.py toggle <<'POND//GLOW'\n%{buffer_name}\n%{cursor_line}\n%{cursor_column}\nPOND//GLOW\n}", "align_view_middle"]
+
+[keys.select]
+C-z = ["normal_mode", "save_selection", "select_all", ":pipe-to python3 ~/.config/helix/pond-glow-preview.py capture", "jump_backward", ":open %sh{python3 ~/.config/helix/pond-glow-preview.py toggle <<'POND//GLOW'\n%{buffer_name}\n%{cursor_line}\n%{cursor_column}\nPOND//GLOW\n}", "align_view_middle"]

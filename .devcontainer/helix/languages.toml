@@ -1,0 +1,8 @@
+# Glow snapshots wrap to the focused view without changing other buffers.
+[[language]]
+name = "pond-glow"
+scope = "text.pond-glow"
+file-types = ["pond-glow"]
+grammar = "markdown"
+soft-wrap = { enable = true, wrap-indicator = "" }
+language-servers = []

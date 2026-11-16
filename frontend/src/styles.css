@@ -1,0 +1,235 @@
+:root {
+    font-family: system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--porcelain);
+    --ink: #103136;
+    --accent: #0fa3b1;
+    --accent-dark: #08717b;
+    --ice: #b5e2fa;
+    --porcelain: #f9f7f3;
+    --custard: #eddea4;
+    --tangerine: #f7a072;
+    --danger: #6b2b0c;
+    --border: #789598;
+}
+
+button,
+input,
+.tab,
+.table-scroll,
+.admin-form,
+.login-form {
+    border: 1px solid var(--border);
+    background: #fff;
+}
+
+button,
+input {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+}
+
+button {
+    padding-inline: 1rem;
+
+    &:hover {
+        background: var(--ice);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}
+
+input {
+    width: 100%;
+    min-width: 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-dark);
+    outline-offset: 3px;
+}
+
+.site-title {
+    color: var(--accent-dark);
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+.navbar,
+.content {
+    max-width: 78rem;
+    margin-inline: auto;
+    padding: 1.5rem;
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--accent);
+
+    .signout-link {
+        justify-self: end;
+    }
+}
+
+.tabs {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tab {
+    padding: 0.625rem 1rem;
+}
+
+.tab-panel,
+.admin-panel {
+    > :not(:first-child) {
+        margin-top: 1.5rem;
+    }
+}
+
+.admin-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+
+    h2 {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Login uses one centered grid column. */
+.login-page {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1.5rem;
+    min-height: 100svh;
+    padding: 1.5rem;
+
+    .site-title {
+        text-align: center;
+    }
+}
+
+.login-form {
+    display: grid;
+    gap: 0.75rem;
+    width: min(100%, 24rem);
+    padding: 1.5rem;
+
+    label {
+        font-weight: 600;
+    }
+
+    .signin-btn {
+        margin-top: 0.5rem;
+    }
+}
+
+/* Keep native table layout; wide tables scroll inside their wrappers. */
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.course-table {
+    min-width: 40rem;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: var(--ice);
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    background: var(--custard);
+}
+
+tbody tr:last-child {
+    td {
+        border-bottom: 0;
+    }
+}
+
+td {
+    input:not(.grade-input) {
+        min-width: 8rem;
+    }
+}
+
+.action-cell {
+    white-space: nowrap;
+
+    button + button {
+        margin-left: 0.5rem;
+    }
+}
+
+.grade-input {
+    width: 6rem;
+}
+
+.tab.active,
+.signin-btn,
+.create-btn,
+.save-btn {
+    border-color: var(--accent-dark);
+    color: var(--ink);
+    background: var(--accent);
+}
+
+button.tab.active:hover,
+.signin-btn:hover,
+.create-btn:hover,
+.save-btn:hover {
+    background: var(--ice);
+}
+
+.delete-btn,
+.drop-btn {
+    border-color: var(--danger);
+    color: var(--danger);
+    background: var(--tangerine);
+
+    &:hover {
+        background: var(--custard);
+    }
+}
+
+.course-link {
+    color: var(--accent-dark);
+    text-underline-offset: 0.2em;
+}
+
+.error {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--danger);
+    color: var(--danger);
+    background: #fff0e5;
+    overflow-wrap: anywhere;
+}

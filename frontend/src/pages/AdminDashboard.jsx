@@ -111,63 +111,65 @@ function CoursesPanel() {
                 </p>
             )}
 
-            <table className="admin-table">
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Teacher</th>
-                        <th>Time</th>
-                        <th>Enrolled</th>
-                        <th>Capacity</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {courses.map((c) =>
-                        editingId === c.class_id ? (
-                            <tr key={c.class_id}>
-                                <td>
-                                    <input aria-label="Edit course name" {...bind(draft, setDraft, "class_name")} />
-                                </td>
-                                <td>
-                                    <input aria-label="Edit teacher name" {...bind(draft, setDraft, "teacher_name")} />
-                                </td>
-                                <td>
-                                    <input aria-label="Edit class time" {...bind(draft, setDraft, "class_time")} />
-                                </td>
-                                <td>{c.enrolled}</td>
-                                <td>
-                                    <input aria-label="Edit capacity" type="number" min="1" {...bind(draft, setDraft, "capacity")} />
-                                </td>
-                                <td className="action-cell">
-                                    <button type="button" className="save-btn" onClick={() => save(c.class_id)}>
-                                        Save
-                                    </button>
-                                    <button type="button" className="cancel-btn" onClick={() => setEditingId(null)}>
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
-                        ) : (
-                            <tr key={c.class_id}>
-                                <td>{c.class_name}</td>
-                                <td>{c.teacher_name}</td>
-                                <td>{c.time}</td>
-                                <td>{c.enrolled}</td>
-                                <td>{c.capacity}</td>
-                                <td className="action-cell">
-                                    <button type="button" className="edit-btn" aria-label={`Edit ${c.class_name}`} onClick={() => startEdit(c)}>
-                                        Edit
-                                    </button>
-                                    <button type="button" className="delete-btn" aria-label={`Delete ${c.class_name}`} onClick={() => remove(c)}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        )
-                    )}
-                </tbody>
-            </table>
+            <div className="table-scroll" role="region" aria-label="Manage courses" tabIndex={0}>
+                <table className="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Teacher</th>
+                            <th>Time</th>
+                            <th>Enrolled</th>
+                            <th>Capacity</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {courses.map((c) =>
+                            editingId === c.class_id ? (
+                                <tr key={c.class_id}>
+                                    <td>
+                                        <input aria-label="Edit course name" {...bind(draft, setDraft, "class_name")} />
+                                    </td>
+                                    <td>
+                                        <input aria-label="Edit teacher name" {...bind(draft, setDraft, "teacher_name")} />
+                                    </td>
+                                    <td>
+                                        <input aria-label="Edit class time" {...bind(draft, setDraft, "class_time")} />
+                                    </td>
+                                    <td>{c.enrolled}</td>
+                                    <td>
+                                        <input aria-label="Edit capacity" type="number" min="1" {...bind(draft, setDraft, "capacity")} />
+                                    </td>
+                                    <td className="action-cell">
+                                        <button type="button" className="save-btn" onClick={() => save(c.class_id)}>
+                                            Save
+                                        </button>
+                                        <button type="button" className="cancel-btn" onClick={() => setEditingId(null)}>
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
+                            ) : (
+                                <tr key={c.class_id}>
+                                    <td>{c.class_name}</td>
+                                    <td>{c.teacher_name}</td>
+                                    <td>{c.time}</td>
+                                    <td>{c.enrolled}</td>
+                                    <td>{c.capacity}</td>
+                                    <td className="action-cell">
+                                        <button type="button" className="edit-btn" aria-label={`Edit ${c.class_name}`} onClick={() => startEdit(c)}>
+                                            Edit
+                                        </button>
+                                        <button type="button" className="delete-btn" aria-label={`Delete ${c.class_name}`} onClick={() => remove(c)}>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
@@ -216,48 +218,50 @@ function StudentsPanel() {
                 </p>
             )}
 
-            <table className="admin-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Student Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {students.map((s) =>
-                        editingId === s.student_id ? (
-                            <tr key={s.student_id}>
-                                <td>{s.student_id}</td>
-                                <td>
-                                    <input aria-label="Edit student name" value={nameDraft} onChange={(e) => setNameDraft(e.target.value)} />
-                                </td>
-                                <td className="action-cell">
-                                    <button type="button" className="save-btn" onClick={() => save(s.student_id)}>
-                                        Save
-                                    </button>
-                                    <button type="button" className="cancel-btn" onClick={() => setEditingId(null)}>
-                                        Cancel
-                                    </button>
-                                </td>
-                            </tr>
-                        ) : (
-                            <tr key={s.student_id}>
-                                <td>{s.student_id}</td>
-                                <td>{s.student_name}</td>
-                                <td className="action-cell">
-                                    <button type="button" className="edit-btn" aria-label={`Rename ${s.student_name}`} onClick={() => startEdit(s)}>
-                                        Rename
-                                    </button>
-                                    <button type="button" className="delete-btn" aria-label={`Delete ${s.student_name}`} onClick={() => remove(s)}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        )
-                    )}
-                </tbody>
-            </table>
+            <div className="table-scroll" role="region" aria-label="Manage students" tabIndex={0}>
+                <table className="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {students.map((s) =>
+                            editingId === s.student_id ? (
+                                <tr key={s.student_id}>
+                                    <td>{s.student_id}</td>
+                                    <td>
+                                        <input aria-label="Edit student name" value={nameDraft} onChange={(e) => setNameDraft(e.target.value)} />
+                                    </td>
+                                    <td className="action-cell">
+                                        <button type="button" className="save-btn" onClick={() => save(s.student_id)}>
+                                            Save
+                                        </button>
+                                        <button type="button" className="cancel-btn" onClick={() => setEditingId(null)}>
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
+                            ) : (
+                                <tr key={s.student_id}>
+                                    <td>{s.student_id}</td>
+                                    <td>{s.student_name}</td>
+                                    <td className="action-cell">
+                                        <button type="button" className="edit-btn" aria-label={`Rename ${s.student_name}`} onClick={() => startEdit(s)}>
+                                            Rename
+                                        </button>
+                                        <button type="button" className="delete-btn" aria-label={`Delete ${s.student_name}`} onClick={() => remove(s)}>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
