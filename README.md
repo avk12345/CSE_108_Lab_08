@@ -315,3 +315,22 @@ Permanently removes a student account and clears all associated enrollment links
   * **`404 Not Found`:** `{ "error": "Student ID not found" }`
 
 ---
+
+# ACME University – React Frontend
+
+| File | What it does |
+
+| `package.json` | Lists the dependencies (React, Vite) and the `npm run dev` / `npm run build` commands. |
+| `package-lock.json` | Locks exact package versions so everyone installs the same libraries. |
+| `index.html` | The one page Vite serves; React renders the whole app into its empty root div. |
+| `vite.config.js` | Runs the dev server on port 5173 and forwards `/api` requests to Flask on port 5000. |
+| `.gitignore` | Keeps `node_modules` and `dist` (generated folders) out of git. |
+| `src/main.jsx` | Starts React and renders `App` into the page. |
+| `src/App.jsx` | Shows Login or the header plus the student, teacher, or admin dashboard, based on the logged-in user's role. |
+| `src/api.js` | Holds every call to the Flask backend, one function per route. |
+| `src/components/CourseTable.jsx` | Reusable course table used by the student and teacher pages. |
+| `src/pages/Login.jsx` | Login form that shows the backend's error message when login fails. |
+| `src/pages/StudentDashboard.jsx` | Your Courses and Add Courses tabs with add and drop buttons. |
+| `src/pages/TeacherDashboard.jsx` | Lists the teacher's courses; clicking one opens its grades. |
+| `src/pages/GradeTable.jsx` | Shows a course's students with editable grades that save on Enter or click away. |
+| `src/pages/AdminDashboard.jsx` | Lets the admin add, edit, and delete courses. Then rename and delete students. |
