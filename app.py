@@ -110,9 +110,15 @@ def mock_login():
     # .strip() removes any accidental spaces at the very beginning or end of the valid name.
     username = username.strip()
         
-    # Check for hardcoded teacher credentials and return their role as JSON
-    if username == "ahepworth":
-        return jsonify({"role": "teacher", "display_name": "Dr Hepworth"}), 200
+    # Check the username against the provided three seeded teacher credentials and return their role as JSON
+    teachers = {
+        "ahepworth": "Dr Hepworth",
+        "rjenkins": "Ralph Jenkins",
+        "swalker": "Susan Walker"
+    }
+    if username in teachers:
+        return jsonify({"role": "teacher", "display_name": teachers[username]}), 200
+
         
     # Check for hardcoded admin credentials and return their role as JSON
     if username == "admin":
